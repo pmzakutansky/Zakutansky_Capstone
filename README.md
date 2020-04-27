@@ -83,7 +83,7 @@ NEAT1_plot
 
 Write and perform a Monte Carlo analysis to calculate a sample size necessary to test the hypothesis. This Monte Carlo must test the primary endpoint.
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r}
 sims=100
 
 b1=100 #expected basal QRE construct reporter
@@ -92,7 +92,7 @@ f1=1.05 #expected fold-to-basal effect of Mutant NEAT1 construct reporter
 sd1=25 #expected standard deviation
 n1=5 #number of replicates for each group. After testing less than 5 replicates, the minimum number required is 5 replicates. 
 ```
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r}
 dataMaker2 <- function(n1, b1, a1, f1, sd1) {
   Control <-rnorm (n1, b1, sd1)
   WT_QRE <- rnorm(n1, (b1*a1), sd1)
