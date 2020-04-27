@@ -55,12 +55,13 @@ library(tidyverse)
 library(readxl)
 ```
 ```{r}
-b=100#expected basal QRE construct reporter
+b=100 #expected basal QRE construct reporter
 a=1.87 #expected fold-to-basal effect of WT NEAT1 QRE construct reporter
 f=1.05 #expected fold-to-basal effect of Mutant NEAT1 construct reporter
-sd=25#expected standard deviation
+sd=25 #expected standard deviation
 n=5 #number of replicates for each group. 
 reps = 100 #number of Monte Carlo simulations to run
+
 dataMaker <- function(n, b, a, f, sd) {
   Control <-rnorm (n, b, sd)
   WT_QRE <- rnorm(n, (b*a), sd)
@@ -85,10 +86,10 @@ Write and perform a Monte Carlo analysis to calculate a sample size necessary to
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 sims=100
 
-b1=100#expected basal QRE construct reporter
+b1=100 #expected basal QRE construct reporter
 a1=1.87 #expected fold-to-basal effect of WT NEAT1 QRE construct reporter
 f1=1.05 #expected fold-to-basal effect of Mutant NEAT1 construct reporter
-sd1=25#expected standard deviation
+sd1=25 #expected standard deviation
 n1=5 #number of replicates for each group. After testing less than 5 replicates, the minimum number required is 5 replicates. 
 ```
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -109,5 +110,5 @@ pwr.pct <- sum(pval<0.05)/sims*100
 paste(pwr.pct, sep="", "% power")
 
 plot<- ggplot(data.frame(pval)) + geom_histogram(aes(pval), color="blue", bins=30) + labs(x="p-value", y="Count") +theme_classic()+ggtitle("p-value distribution of NEAT1 QRE ANOVA Monte Carlo") + theme(plot.title=element_text(hjust=0.5))
-plotd
+plot
 ```
