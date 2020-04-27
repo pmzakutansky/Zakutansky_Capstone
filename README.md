@@ -85,7 +85,6 @@ Write and perform a Monte Carlo analysis to calculate a sample size necessary to
 
 ```{r}
 sims=100
-
 b1=100 #expected basal QRE construct reporter
 a1=1.87 #expected fold-to-basal effect of WT NEAT1 QRE construct reporter
 f1=1.05 #expected fold-to-basal effect of Mutant NEAT1 construct reporter
@@ -101,14 +100,12 @@ dataMaker2 <- function(n1, b1, a1, f1, sd1) {
   Predictor <- c(rep(c("Control", "WT_QRE", "Mutant_QRE"), each=n))
   ID<- as.factor(c(1:length(Predictor)))
   NEAT1df3<- data.frame(ID, Predictor, Response)}
-
 pval <- replicate(sims, {
   sample.df <- dataMaker2(n1, sd1, b1, a1, f1)
   one_wayAnova <- ezANOVA(data=sample.df, dv=Response, wid=ID, between=Predictor, type=2, detailed=F)
   pval <- one_wayAnova$ANOVA[1,5]})
 pwr.pct <- sum(pval<0.05)/sims*100
 paste(pwr.pct, sep="", "% power")
-
 plot<- ggplot(data.frame(pval)) + geom_histogram(aes(pval), color="blue", bins=30) + labs(x="p-value", y="Count") +theme_classic()+ggtitle("p-value distribution of NEAT1 QRE ANOVA Monte Carlo") + theme(plot.title=element_text(hjust=0.5))
 plot
 ```
